@@ -1,6 +1,6 @@
 let weatherApp = {
   main: {},
-  d: new Date(),
+  day: new Date(),
   daysOfWeek: [
     "Sunday",
     "Monday",
@@ -161,7 +161,7 @@ function populateDisplay() {
 let createForecast = () => {
   for (i = 0; i < weatherApp.main.daily.length - 1; i++) {
     document.getElementById(`day_of_week_${i}`).textContent =
-      weatherApp.daysOfWeek[dayOfW(i)];
+      weatherApp.daysOfWeek[dayOfWeek(i)];
     document.getElementById(`chance_of_rain_${i}`).textContent =
       Math.round(weatherApp.main.daily[i].pop * 100) + "%";
     document.getElementById(`humidity_${i}`).textContent =
@@ -181,8 +181,8 @@ let createForecast = () => {
 };
 
 //returning day of week
-function dayOfW(i) {
-  x = weatherApp.d.getDay() + i;
+function dayOfWeek(i) {
+  x = weatherApp.day.getDay() + i;
   switch (x) {
     case 6:
       return 0;
