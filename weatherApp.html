@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="weatherApp.css" />
+<html>
+  <main class="fade_in_main">
+    <header>
+      <div id="search_bar_div">
+        <input
+          id="search_bar"
+          type="text"
+          placeholder="Please enter a location"
+        />
+        <button id="submit"><b>Search</b></button>
+        <button id="change_units">&#8451; / &#8457;</button>
+      </div>
+    </header>
+    <div id="central_div" class="fade_in_inner">
+      <div id="current_temp_data">
+        <div id="city_main_data">
+          <div id="city_name"></div>
+          <div id="city_weather"></div>
+          <div id="city_temp"></div>
+        </div>
+        <div id="city_main_extra">
+          <div id="feels_like"></div>
+          <div id="wind"></div>
+          <div id="humidity"></div>
+          <div id="sunrise"></div>
+          <div id="sunset"></div>
+        </div>
+      </div>
+      <div id="weekly_forecast" class="fade_in_inner">
+        <table>
+          <tr>
+            <th>Day</th>
+            <th></th>
+            <th>Chance of Rain</th>
+            <th>Humidity</th>
+            <th>Temperature mid-day</th>
+          </tr>
+          <tr id="day_0">
+            <th id="day_of_week_0"></th>
+            <th id="day_of_week_0_img"><img id="img_0" /></th>
+            <th id="chance_of_rain_0"></th>
+            <th id="humidity_0"></th>
+            <th id="temperature_0"></th>
+          </tr>
+          <tr id="day_1">
+            <th id="day_of_week_1"></th>
+            <th id="day_of_week_1_img"><img id="img_1" /></th>
+            <th id="chance_of_rain_1"></th>
+            <th id="humidity_1"></th>
+            <th id="temperature_1"></th>
+          </tr>
+          <tr id="day_2">
+            <th id="day_of_week_2"></th>
+            <th id="day_of_week_2_img"><img id="img_2" /></th>
+            <th id="chance_of_rain_2"></th>
+            <th id="humidity_2"></th>
+            <th id="temperature_2"></th>
+          </tr>
+          <tr id="day_3">
+            <th id="day_of_week_3"></th>
+            <th id="day_of_week_3_img"><img id="img_3" /></th>
+            <th id="chance_of_rain_3"></th>
+            <th id="humidity_3"></th>
+            <th id="temperature_3"></th>
+          </tr>
+          <tr id="day_4">
+            <th id="day_of_week_4"></th>
+            <th id="day_of_week_4_img"><img id="img_4" /></th>
+            <th id="chance_of_rain_4"></th>
+            <th id="humidity_4"></th>
+            <th id="temperature_4"></th>
+          </tr>
+          <tr id="day_5">
+            <th id="day_of_week_5"></th>
+            <th id="day_of_week_5_img"><img id="img_5" /></th>
+            <th id="chance_of_rain_5"></th>
+            <th id="humidity_5"></th>
+            <th id="temperature_5"></th>
+          </tr>
+          <tr id="day_6">
+            <th id="day_of_week_6"></th>
+            <th id="day_of_week_6_img"><img id="img_6" /></th>
+            <th id="chance_of_rain_6"></th>
+            <th id="humidity_6"></th>
+            <th id="temperature_6"></th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+</html>
+<script src="weatherApp.js"></script>
