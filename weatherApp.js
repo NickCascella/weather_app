@@ -1,16 +1,18 @@
-let weatherApp = {};
-let d = new Date();
-let daysOfWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let unit = "metric";
-let storedLocation = "";
+let weatherApp = {
+  main: {},
+  d: new Date(),
+  daysOfWeek: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+  unit: "metric",
+  storedLocation: "Toronto",
+};
 
 let getCurrentLocationData = async (city) => {
   let cityName = city;
@@ -36,7 +38,7 @@ let getCurrentLocationData = async (city) => {
 
 let getForecastData = async (lat, lon) => {
   let forecastData = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${unit}&appid=2be85eb54330596629505e20d2e6cf90`,
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${weatherApp.unit}&appid=2be85eb54330596629505e20d2e6cf90`,
     { mode: "cors" }
   );
   let info = await forecastData.json();
@@ -57,11 +59,11 @@ let convertUnixTime = (time) => {
 //change units (Metric/Imperial)
 let changeUnitsBtn = document.getElementById("change_units");
 changeUnitsBtn.addEventListener("click", function changeUnits() {
-  if (unit === "metric") {
-    unit = "imperial";
+  if (weatherApp.unit === "metric") {
+    weatherApp.unit = "imperial";
     submitSearch(changeUnitsBtn);
   } else {
-    unit = "metric";
+    weatherApp.unit = "metric";
     submitSearch(changeUnitsBtn);
   }
 });
@@ -72,17 +74,17 @@ let submitSearch = (e) => {
     document.getElementById("central_div").style.display = "none";
     getCurrentLocationData(result.value);
     document.getElementById("city_name").textContent = result.value;
-    storedLocation = result.value;
+    weatherApp.storedLocation = result.value;
     result.value = "";
   } else if (e === "Toronto") {
     document.getElementById("central_div").style.display = "none";
     getCurrentLocationData(e);
     document.getElementById("city_name").textContent = e;
-    storedLocation = "Toronto";
+    weatherApp.storedLocation = "Toronto";
     result.value = "";
   } else if (e === changeUnitsBtn) {
     document.getElementById("central_div").style.display = "none";
-    getCurrentLocationData(storedLocation);
+    getCurrentLocationData(weatherApp.storedLocation);
   }
 };
 
@@ -107,30 +109,30 @@ function populateDisplay() {
   }
 
   //current temp
-  if (unit === "metric") {
+  if (weatherApp.unit === "metric") {
     document.getElementById("city_temp").innerHTML =
       `${Math.round(weatherApp.main.current.temp)}` + "&#8451;";
-  } else if (unit === "imperial") {
+  } else if (weatherApp.unit === "imperial") {
     document.getElementById("city_temp").innerHTML =
       `${Math.round(weatherApp.main.current.temp)}` + "&#8457;";
   }
 
   //feels like
-  if (unit === "metric") {
+  if (weatherApp.unit === "metric") {
     document.getElementById("feels_like").innerHTML =
       `Feels Like: ${Math.round(weatherApp.main.current.feels_like)}` +
       "&#8451;";
-  } else if (unit === "imperial") {
+  } else if (weatherApp.unit === "imperial") {
     document.getElementById("feels_like").innerHTML =
       `Feels Like: ${Math.round(weatherApp.main.current.feels_like)}` +
       "&#8457;";
   }
 
   //windiness
-  if (unit === "metric") {
+  if (weatherApp.unit === "metric") {
     document.getElementById("wind").innerHTML =
       `Wind Speed: ${weatherApp.main.current.wind_speed}` + " &#13223;";
-  } else if (unit === "imperial") {
+  } else if (weatherApp.unit === "imperial") {
     document.getElementById("wind").innerHTML =
       `Wind Speed: ${weatherApp.main.current.wind_speed}` + " mph";
   }
@@ -160,15 +162,15 @@ function populateDisplay() {
 let createForecast = () => {
   for (i = 0; i < weatherApp.main.daily.length - 1; i++) {
     document.getElementById(`day_of_week_${i}`).textContent =
-      daysOfWeek[dayOfW(i)];
+      weatherApp.daysOfWeek[dayOfW(i)];
     document.getElementById(`chance_of_rain_${i}`).textContent =
       Math.round(weatherApp.main.daily[i].pop * 100) + "%";
     document.getElementById(`humidity_${i}`).textContent =
       weatherApp.main.daily[i].humidity + "%";
-    if (unit === "metric") {
+    if (weatherApp.unit === "metric") {
       document.getElementById(`temperature_${i}`).innerHTML =
         Math.round(weatherApp.main.daily[i].temp.day) + "&#8451;";
-    } else if (unit === "imperial") {
+    } else if (weatherApp.unit === "imperial") {
       document.getElementById(`temperature_${i}`).innerHTML =
         Math.round(weatherApp.main.daily[i].temp.day) + "&#8457;";
     }
@@ -181,7 +183,7 @@ let createForecast = () => {
 
 //returning day of week
 function dayOfW(i) {
-  x = d.getDay() + i;
+  x = weatherApp.d.getDay() + i;
   switch (x) {
     case 6:
       return 0;
