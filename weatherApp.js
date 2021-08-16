@@ -22,6 +22,7 @@ let getCurrentLocationData = async (city) => {
     );
     if (weatherData.ok === false) {
       alert("Invalid Entry");
+      submitSearch("Toronto");
     }
   } catch {
     console.error("network failure");
@@ -72,13 +73,12 @@ let submitSearch = (e) => {
     getCurrentLocationData(result.value);
     document.getElementById("city_name").textContent = result.value;
     storedLocation = result.value;
-    console.log(storedLocation);
     result.value = "";
-  } else if (e === "London") {
+  } else if (e === "Toronto") {
     document.getElementById("central_div").style.display = "none";
     getCurrentLocationData(e);
     document.getElementById("city_name").textContent = e;
-    storedLocation = "London";
+    storedLocation = "Toronto";
     result.value = "";
   } else if (e === changeUnitsBtn) {
     document.getElementById("central_div").style.display = "none";
@@ -90,7 +90,7 @@ let searchBtn = document.getElementById("submit");
 let result = document.getElementById("search_bar");
 result.addEventListener("keypress", submitSearch);
 searchBtn.addEventListener("click", submitSearch);
-submitSearch("London");
+submitSearch("Toronto");
 
 function populateDisplay() {
   //Current weather conditions
