@@ -18,7 +18,7 @@ let getCurrentLocationData = async (city) => {
   let weatherData;
   try {
     weatherData = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=2be85eb54330596629505e20d2e6cf90`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=2be85eb54330596629505e20d2e6cf90`,
       { mode: "cors" }
     );
     if (weatherData.ok === false) {
